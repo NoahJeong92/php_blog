@@ -15,7 +15,8 @@ class AdminProjectsController extends Controller
      */
     public function index()
     {
-        //
+        $projects = Project::all();
+        return view('AdminProject.index', compact('projects'));
     }
 
     /**
