@@ -42,13 +42,13 @@ class AdminProjectsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'title' => 'required',
-            'thumbnail' => 'required',
-            'description' => 'required',
-            'github_link' => 'required',
-            'youtube_link' => 'required',
-            'skills' => 'required',
-            'category_id' => 'required'
+            // 'title' => 'required',
+            // 'thumbnail' => 'required',
+            // 'description' => 'required',
+            // 'github_link' => 'required',
+            // 'youtube_link' => 'required',
+            // 'skills' => 'required',
+            // 'category_id' => 'required'
 
         ]);
 
@@ -89,15 +89,11 @@ class AdminProjectsController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $project = Project::find($id);
+        $categories = Category::all();
+        return view('AdminProject.edit_project', compact('project','categories'));
     }
 
     /**
@@ -109,7 +105,38 @@ class AdminProjectsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            // 'title' => 'required',
+            // 'description' => 'required',
+            // 'github_link' => 'required',
+            // 'youtube_link' => 'required',
+            // 'skills' => 'required',
+            // 'category_id' => 'required'
+
+        ]);
+
+        $project = Project::find($id);
+
+        if($file = $request->file('thumbnail')) {
+
+            $name = time() . $file->getClientOriginalName();
+
+            $file->move('images', $name);
+
+            $project->thumbnail = $name;
+        }
+
+        $project->title = $request->title;
+        $project->description = $request->description;
+        $project->github_link = $request->ithub_link;
+        $project->youtube_link = $request->youtube_link;
+        $project->skills = $request->skills;
+        $project->category_id = $request->category_id;
+
+        $project->save();
+
+        return redirect()->route('admin.projects.index')->with('success', 'Project Updateed Successfully!');
+
     }
 
     /**

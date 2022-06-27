@@ -30,6 +30,7 @@
                     <th scope="col">Skills</th>
                     <th scope="col">작성일</th>
                     <th scope="col">수정일</th>
+                    <th scope="col">수정하기</th>
                 </tr>
             </thead>
             <tbody>
@@ -52,17 +53,17 @@
                         <td scope="row">{{ $project->skills }}</td>
                         <td>{{ $project->created_at->diffForHumans() }}</td>
                         <td>{{ $project->updated_at->diffForHumans() }}</td>
-                        {{-- <td>
+                        <td>
                             <a class="btn btn-primary"
-                                href="{{ route('admin.projects.edit', $project->id) }}">Edit</a>
-                            <div>
+                                href="{{ route('admin.projects.edit', $project->id) }}">수정하기</a>
+                            {{-- <div>
                                 <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <input type="submit" name="submit" value="Delete" class="btn btn-danger">
                                 </form>
-                            </div>
-                        </td> --}}
+                            </div> --}}
+                        </td>
 
 
 

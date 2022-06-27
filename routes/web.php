@@ -15,7 +15,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/admin/projects/create',[App\Http\Controllers\AdminProjectsController::class, 'create'])->name('admin.projects.create');
 Route::post('/admin/projects/store', [App\Http\Controllers\AdminProjectsController::class, 'store'])->name('admin.projects.store');
+
 Route::get('/admin/projects/index',[App\Http\Controllers\AdminProjectsController::class, 'index'])->name('admin.projects.index');
+
+Route::get('/admin/projects/edit/{id}',[App\Http\Controllers\AdminProjectsController::class, 'edit'])->name('admin.projects.edit');
+Route::post('/admin/projects/update/{id}',[App\Http\Controllers\AdminProjectsController::class, 'update'])->name('admin.projects.update');
+
+
 
 Auth::routes();
 
